@@ -1,6 +1,8 @@
 // start_index is the index to start looking for the keys in the given string.
 // It is not the index to start the keys at.
 function generate(keys, start_index) {
+	'use strict';
+
 	// Convert array of strings to array of arrays of numbers.
 	let codes = keys.map(key => [].map.call(key, x => x.charCodeAt(0)));
 
@@ -11,7 +13,7 @@ function generate(keys, start_index) {
 		else root[num] = get_next(root[num] || {}, code, i + 1);
 		return root;
 	}
-	let trie = {NaN:NaN};
+	let trie = {};
 	for (let code of codes) {
 		let num = code[0];
 		trie[num] = get_next(trie[num] || {}, code, 1);
@@ -47,5 +49,5 @@ function generate(keys, start_index) {
 	// New function returns the *length* of the found match. Since you already
 	// have the original string and start position, you can find the actual
 	// string yourself.
-	return new Function('str', '"use strict;"\n\n' + code);
+	return new Function('str', '"use strict;"\n\n' + code + '\n\nreturn 0;');
 }
